@@ -165,3 +165,36 @@
 .map-route { stroke-dasharray: 9 8; animation: route-flow 18s linear infinite; }
 @keyframes route-flow { to { stroke-dashoffset: -170; } }
 @media (prefers-reduced-motion: reduce) { .map-route { animation: none; } }
+
+@utility detail-label {
+  color: var(--muted-foreground);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+@utility detail-value {
+  margin-top: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+@utility field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+@utility field-input {
+  margin-top: 0.5rem;
+  display: block;
+  height: 2.75rem;
+  width: 100%;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  padding: 0 0.75rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  outline: none;
+  &:focus { border-color: var(--primary); }
+}
