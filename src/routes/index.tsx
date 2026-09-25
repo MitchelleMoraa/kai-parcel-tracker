@@ -42,7 +42,7 @@ function RouteMap({ parcel }: { parcel: Parcel }) {
         LIVE ROUTE <span className="ml-1 font-mono text-signal">{parcel.id}</span>
       </div>
       <div className="absolute right-5 top-5 z-10 hidden rounded border border-primary-foreground/15 bg-foreground/80 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-primary-foreground/80 md:block">Kenya network · route view</div>
-      <svg viewBox="0 0 800 340" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 size-full" role="img" aria-label={`Route from ${parcel.origin} to ${parcel.destination}`}>
+      <svg viewBox="0 0 800 340" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 size-full" role="img" aria-label={`Route from ${parcel.origin} to ${parcel.destination}`}>
         <path d="M-30 260 C110 238 170 275 290 215 S475 120 610 175 S770 205 830 155" fill="none" stroke="var(--ink-line)" strokeWidth="2" opacity=".8"/>
         <path d="M-20 60 C140 100 220 68 335 108 S500 255 820 300" fill="none" stroke="var(--ink-line)" strokeWidth="1.5" opacity=".55"/>
         <path d="M95 300 C180 205 210 160 320 158 S505 96 770 55" fill="none" stroke="var(--ink-line)" strokeWidth="1.5" opacity=".5"/>
