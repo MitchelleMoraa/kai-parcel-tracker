@@ -17,12 +17,13 @@ export const Route = createFileRoute("/")({
 
 type Status = 0 | 1 | 2;
 type Parcel = {
-  id: string; sender: string; receiver: string; origin: string; destination: string;
-  weight: string; amount: string; status: Status; created: string; distance?: string;
+  id: string; sender: string; senderPhone: string; receiver: string; receiverPhone: string;
+  origin: string; destination: string; weight: string; amount: string; status: Status; created: string; distance?: string;
 };
 
 const starterParcel: Parcel = {
-  id: "KAI-687880639", sender: "Vincents Odhiambo", receiver: "Jacinter Aoko",
+  id: "KAI-687880639", sender: "Vincents Odhiambo", senderPhone: "+254 712 480 915",
+  receiver: "Jacinter Aoko", receiverPhone: "+254 733 216 704",
   origin: "Nairobi", destination: "Busia", weight: "4.5", amount: "740", status: 2,
   created: "24 Sep 2026 · 2:20 PM", distance: "578 km",
 };
@@ -72,7 +73,7 @@ function Index() {
   const [pin, setPin] = useState("");
   const [agentMessage, setAgentMessage] = useState("");
   const [copied, setCopied] = useState(false);
-  const [form, setForm] = useState({ sender: "", receiver: "", origin: "Nairobi", destination: "Busia", weight: "", amount: "" });
+  const [form, setForm] = useState({ sender: "", senderPhone: "", receiver: "", receiverPhone: "", origin: "Nairobi", destination: "Busia", weight: "", amount: "" });
   const active = parcels.find((p) => p.id === activeId) ?? starterParcel;
 
   function track(e: FormEvent) {
@@ -89,7 +90,7 @@ function Index() {
     setParcels((prev) => [parcel, ...prev]);
     setActiveId(parcel.id);
     setAgentMessage(`${parcel.id} booked. You can find it in the parcel list below.`);
-    setForm({ sender: "", receiver: "", origin: "Nairobi", destination: "Busia", weight: "", amount: "" });
+    setForm({ sender: "", senderPhone: "", receiver: "", receiverPhone: "", origin: "Nairobi", destination: "Busia", weight: "", amount: "" });
   }
 
   function updateStatus(id: string, status: Status) {
