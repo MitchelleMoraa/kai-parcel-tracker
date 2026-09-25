@@ -19,6 +19,8 @@
  */
 
 @theme inline {
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Manrope", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -59,28 +61,38 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-line: var(--ink-line);
+  --color-signal: var(--signal);
+  --color-success: var(--success);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.004 245);
+  --foreground: oklch(0.19 0.018 240);
+  --surface: oklch(1 0 0);
+  --ink: oklch(0.19 0.018 240);
+  --ink-line: oklch(0.31 0.022 240);
+  --signal: oklch(0.84 0.16 85);
+  --success: oklch(0.55 0.15 155);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.54 0.2 255);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
+  --muted: oklch(0.955 0.007 245);
+  --muted-foreground: oklch(0.52 0.02 245);
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
+  --border: oklch(0.91 0.009 245);
+  --input: oklch(0.91 0.009 245);
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -140,5 +152,49 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+}
+
+.map-grid {
+  background-color: var(--ink);
+  background-image: linear-gradient(var(--ink-line) 1px, transparent 1px), linear-gradient(90deg, var(--ink-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.map-route { stroke-dasharray: 9 8; animation: route-flow 18s linear infinite; }
+@keyframes route-flow { to { stroke-dashoffset: -170; } }
+@media (prefers-reduced-motion: reduce) { .map-route { animation: none; } }
+
+@utility detail-label {
+  color: var(--muted-foreground);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+@utility detail-value {
+  margin-top: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+@utility field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+@utility field-input {
+  margin-top: 0.5rem;
+  display: block;
+  height: 2.75rem;
+  width: 100%;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  padding: 0 0.75rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  outline: none;
+  &:focus { border-color: var(--primary); }
 }
