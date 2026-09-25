@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { ArrowRight, Check, ChevronDown, CircleCheck, Clipboard, Clock3, LogOut, MapPin, Package, PackageCheck, Plus, Search, ShieldCheck, Truck } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, CircleCheck, Clipboard, Clock3, LogOut, Package, PackageCheck, Plus, Search, ShieldCheck, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
