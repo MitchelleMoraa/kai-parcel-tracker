@@ -18,13 +18,13 @@ export const Route = createFileRoute("/")({
 type Status = 0 | 1 | 2;
 type Parcel = {
   id: string; sender: string; receiver: string; origin: string; destination: string;
-  weight: string; amount: string; status: Status; created: string;
+  weight: string; amount: string; status: Status; created: string; distance?: string;
 };
 
 const starterParcel: Parcel = {
   id: "KAI-687880639", sender: "Vincents Odhiambo", receiver: "Jacinter Aoko",
   origin: "Nairobi", destination: "Busia", weight: "4.5", amount: "740", status: 2,
-  created: "24 Sep 2026 · 2:20 PM",
+  created: "24 Sep 2026 · 2:20 PM", distance: "578 km",
 };
 
 const stages = [
@@ -34,30 +34,24 @@ const stages = [
 ];
 
 function RouteMap({ parcel }: { parcel: Parcel }) {
-  const progress = parcel.status === 0 ? 8 : parcel.status === 1 ? 55 : 100;
   return (
     <div className="map-grid relative h-[260px] overflow-hidden rounded-t-lg md:h-[340px]">
-      <div className="absolute left-5 top-5 z-10 flex items-center gap-2 rounded bg-foreground/90 px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm md:left-7 md:top-7">
-        <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-50"/><span className="relative inline-flex size-2 rounded-full bg-signal"/></span>
-        LIVE ROUTE <span className="ml-1 font-mono text-signal">{parcel.id}</span>
-      </div>
       <div className="absolute right-5 top-5 z-10 hidden rounded border border-primary-foreground/15 bg-foreground/80 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-primary-foreground/80 md:block">Kenya network · route view</div>
       <svg viewBox="0 0 800 340" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 size-full" role="img" aria-label={`Route from ${parcel.origin} to ${parcel.destination}`}>
         <path d="M-30 260 C110 238 170 275 290 215 S475 120 610 175 S770 205 830 155" fill="none" stroke="var(--ink-line)" strokeWidth="2" opacity=".8"/>
         <path d="M-20 60 C140 100 220 68 335 108 S500 255 820 300" fill="none" stroke="var(--ink-line)" strokeWidth="1.5" opacity=".55"/>
         <path d="M95 300 C180 205 210 160 320 158 S505 96 770 55" fill="none" stroke="var(--ink-line)" strokeWidth="1.5" opacity=".5"/>
-        <path d="M170 235 C250 212 295 110 392 140 S530 216 650 128" fill="none" stroke="var(--primary)" strokeWidth="3" strokeLinecap="round" className="map-route"/>
-        <circle cx="170" cy="235" r="17" fill="var(--primary)" opacity=".18"/><circle cx="170" cy="235" r="6" fill="var(--primary)" stroke="var(--primary-foreground)" strokeWidth="2"/>
-        <circle cx="650" cy="128" r="20" fill="var(--signal)" opacity=".15"/><circle cx="650" cy="128" r="7" fill="var(--signal)" stroke="var(--ink)" strokeWidth="2"/>
+        <path d="M650 235 L170 86" fill="none" stroke="var(--primary)" strokeWidth="3" strokeLinecap="round" className="map-route"/>
+        <circle cx="650" cy="235" r="17" fill="var(--signal)" opacity=".18"/><circle cx="650" cy="235" r="6" fill="var(--signal)" stroke="var(--ink)" strokeWidth="2"/>
+        <circle cx="170" cy="86" r="20" fill="var(--signal)" opacity=".15"/><circle cx="170" cy="86" r="7" fill="var(--primary-foreground)" stroke="var(--primary)" strokeWidth="2"/>
         <circle cx="392" cy="140" r="3" fill="var(--muted-foreground)"/><circle cx="505" cy="189" r="3" fill="var(--muted-foreground)"/>
         <text x="392" y="127" fill="var(--primary-foreground)" opacity=".5" textAnchor="middle" fontSize="11" fontFamily="DM Sans">NAKURU</text>
         <text x="505" y="211" fill="var(--primary-foreground)" opacity=".5" textAnchor="middle" fontSize="11" fontFamily="DM Sans">KISUMU</text>
-        <text x="170" y="270" fill="var(--primary-foreground)" textAnchor="middle" fontSize="13" fontWeight="700" fontFamily="Manrope">{parcel.origin.toUpperCase()}</text>
-        <text x="650" y="98" fill="var(--signal)" textAnchor="middle" fontSize="13" fontWeight="800" fontFamily="Manrope">{parcel.destination.toUpperCase()}</text>
+        <text x="650" y="270" fill="var(--signal)" textAnchor="middle" fontSize="13" fontWeight="700" fontFamily="Manrope">{parcel.origin.toUpperCase()}</text>
+        <text x="170" y="59" fill="var(--signal)" textAnchor="middle" fontSize="13" fontWeight="800" fontFamily="Manrope">{parcel.destination.toUpperCase()}</text>
       </svg>
-      <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between gap-3 md:bottom-6 md:left-7 md:right-7">
-        <div className="rounded border border-primary-foreground/10 bg-foreground/75 px-3 py-2 text-xs text-primary-foreground/70 backdrop-blur-sm">{parcel.status === 2 ? "Arrived at destination" : parcel.status === 1 ? "Moving towards destination" : "Preparing for dispatch"}</div>
-        <div className="font-display text-3xl font-extrabold text-primary-foreground md:text-4xl">{progress}<span className="text-lg text-signal">%</span></div>
+      <div className="absolute bottom-4 left-4 max-w-[calc(100%-2rem)] rounded border border-primary-foreground/10 bg-foreground/90 px-3 py-2 text-xs text-primary-foreground/60 backdrop-blur-sm md:bottom-5 md:left-5">
+        Active ID: <span className="font-mono font-bold text-signal">{parcel.id}</span>
       </div>
     </div>
   );
@@ -135,10 +129,10 @@ function Index() {
             <div className="min-w-0">
               <section className="overflow-hidden rounded-lg border border-border bg-surface shadow-sm" aria-label="Parcel route">
                 <RouteMap parcel={active}/>
-                <div className="grid grid-cols-2 gap-4 border-b border-border px-5 py-6 md:grid-cols-3 md:px-7">
-                  <div><p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">From</p><p className="flex items-center gap-1.5 font-display text-sm font-extrabold md:text-base"><MapPin className="size-4 text-primary"/>{active.origin}</p></div>
-                  <div><p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">To</p><p className="flex items-center gap-1.5 font-display text-sm font-extrabold md:text-base"><MapPin className="size-4 text-signal"/>{active.destination}</p></div>
-                  <div className="col-span-2 border-t border-border pt-4 md:col-span-1 md:border-l md:border-t-0 md:pl-6 md:pt-0"><p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Current status</p><StatusPill status={active.status}/></div>
+                <div className="grid grid-cols-3 gap-2 border-b border-border px-4 py-5 text-center sm:gap-4 md:px-7">
+                  <div className="min-w-0"><p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Route transit</p><p className="font-display text-xs font-extrabold sm:text-sm">{active.origin} <span aria-hidden="true">→</span> {active.destination}</p></div>
+                  <div className="min-w-0 border-x border-border px-1 sm:px-4"><p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Distance</p><p className="font-display text-xs font-extrabold sm:text-sm">{active.distance ?? "Not available"}</p></div>
+                  <div className="min-w-0"><p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Live progress</p><p className="font-display text-xs font-extrabold text-primary sm:text-sm">{active.status === 0 ? "8.0" : active.status === 1 ? "55.0" : "100.0"}%</p></div>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 md:px-7"><div className="flex items-center gap-2 text-xs text-muted-foreground"><ShieldCheck className="size-4 text-primary"/> Tracking ID <strong className="font-mono text-foreground">{active.id}</strong></div><Button variant="ghost" size="sm" onClick={copyId} title="Copy tracking number" className="text-xs text-primary">{copied ? <Check/> : <Clipboard/>}{copied ? "Copied" : "Copy ID"}</Button></div>
               </section>
