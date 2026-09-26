@@ -1,14 +1,16 @@
-# Welcome to your Lovable project
+# Kai Parcel Tracker
+
+I sent parcel to my mother and it took long to reach her,the company that offers the service did not have a tracking app .I had to call them to inquire ...now ..i googled the whole thing and suprisingly google gave me a simulated project of a tracking tool.I love loved it so much ...I took screenshots of it ...I would like you to go through the screnshots and view how it looks like .....see how good you can make it.One last thing is change the company name from Ena to KAI .....
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/1e507ed8-030a-4cf5-93d8-8534b947f389).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +22,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
