@@ -65,6 +65,7 @@
   --color-ink: var(--ink);
   --color-ink-line: var(--ink-line);
   --color-signal: var(--signal);
+  --color-gold: var(--gold);
   --color-success: var(--success);
 }
 
@@ -73,9 +74,10 @@
   --background: oklch(0.985 0.004 245);
   --foreground: oklch(0.19 0.018 240);
   --surface: oklch(1 0 0);
-  --ink: oklch(0.19 0.018 240);
+  --ink: oklch(0.16 0.014 240);
   --ink-line: oklch(0.31 0.022 240);
-  --signal: oklch(0.84 0.16 85);
+  --signal: oklch(0.80 0.135 84);
+  --gold: oklch(0.66 0.115 78);
   --success: oklch(0.55 0.15 155);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
